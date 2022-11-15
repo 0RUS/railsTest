@@ -1,0 +1,56 @@
+<div class="card">
+  <h1 class="card-header">
+    Sign Up
+  </h1>
+  <div class="card-body">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field form-group">
+        <br/>
+        <%= f.email_field :email,
+          class:"form-control", 
+          placeholder:"Email",
+          autofocus: true,
+          autocomplete: "email" %>
+        <br/>
+        <%= f.phone_field :phone,
+          class:"form-control", 
+          placeholder:"Phone",
+          autocomplete: "phone" %>
+
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password,
+          class:"form-control", 
+          placeholder:"Password",
+          autocomplete: "new-password" %>
+        <br/>
+        <%= f.password_field :password_confirmation,
+          class:"form-control", 
+          placeholder:"Confirm password",
+          autocomplete: "new-password" %>
+      </div>
+      <br/>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :user_role, 1,
+          class:"form-check-input" %>
+        <p class="form-check-label fs-5">Patient</p>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :user_role, 2,
+          class:"form-check-input" %>
+        <p class="form-check-label fs-5 ">Doctor</p>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Next step",
+        class:"btn btn-primary" %>
+        <br/><br/>
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+  </div>
+</div>

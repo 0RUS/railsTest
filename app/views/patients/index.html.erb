@@ -1,0 +1,45 @@
+<h1>Patients List</h1>
+<table class="table table-secondary table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <% if current_user.user_role == 0 %>
+        <th>ID:</th>
+        <th>User ID:</th>
+      <% end %>
+    </tr>
+  <thead>
+
+  <tbody>
+    <% @patients.each do |patient| %>
+      <% if current_user.user_role == 0 %>
+        <tr class="card-text" style="transform: rotate(0);">
+          <td><strong><%= link_to patient.first_name + " " + patient.last_name, patient, class:"link-dark stretched-link text-decoration-none" %></strong></td>
+          <td><%= patient.phone %></td>
+          <td><%= patient.email %></td>
+          <% if current_user.user_role == 0 %>
+            <th><%= patient.id %></th>
+            <th><%= patient.user_id %></th>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+    <% if current_user.user_role == 0 %>
+      <tr class="card-text text-center" style="transform: rotate(0);"><td colspan=<%= 5 - current_user.user_role %>><strong><%= link_to "Create patient", new_patient_path, class:"h4 link-dark stretched-link text-decoration-none"%></strong></td></tr>
+    <% end %>
+  </tbody>
+</table>
+
+<style>
+table {
+  border-collapse:separate;
+  border:solid 5px;
+  border-radius:10px;
+}
+
+th, td {
+  border-radius:5px;
+}
+</style>

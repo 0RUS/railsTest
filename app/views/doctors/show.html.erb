@@ -1,0 +1,32 @@
+<div class="d-flex flex-column" style="align-items: center;">
+  <%= render @doctor%>
+
+  <% if current_user.user_role != 2 %>
+    <br/>
+    <%= form_for :appointment, url: "/appointments", method: "post" do |form| %>
+      <div class="input-group mb-3">
+        <% @show = current_user.user_role != 0 ? true : false %>
+        <%= form.number_field :doctor,
+          class:"form-control",
+          value: @doctor.user_id, hidden: @show %>
+        <%= form.number_field :patient,
+          class:"form-control",
+          value: current_user.id, hidden: @show %>
+        <%= form.text_field :complaint,
+          class:"form-control",
+          placeholder:"Complaints" %>
+        <%= form.check_box :is_active,
+          checked: true, hidden: true %>
+        <%= form.submit "Make an appointment", class:"btn btn-outline-secondary"%>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="btn-toolbar" role="toolbar" style="display: flex; align-items: center; justify-content: center;">
+    <%= link_to "Back to doctors", doctors_path, class:"m-1 btn btn-primary" %>
+    <% if current_user.user_role == 0 %>
+    <%= link_to "Edit", edit_doctor_path(@doctor), class:"m-1 btn btn-outline-warning" %>
+    <%= button_to "Delete", @doctor, method: :delete, class:"m-1 btn btn-outline-danger" %>
+    <% end %>
+  </div>
+</div>

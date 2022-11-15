@@ -1,0 +1,8 @@
+<div class="card">
+  <h2 class="card-header">New Appointment</h2>
+  <div class="card-body">
+    <%= render "form", appointment: @appointment %>
+    <br/>
+    <%= link_to "Back to appointments", appointments_path, class:"btn btn-outline-secondary" %>
+  </div>
+</div>

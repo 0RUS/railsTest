@@ -1,0 +1,48 @@
+<h1>Appointments List</h1>
+<table class="table table-secondary table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Complaint</th>
+      <th>Recommendation</th>
+      <% if current_user.user_role == 0 %>
+        <th>Doctor</th>
+        <th>Patient</th>
+        <th>ID</th>
+        <th>Is active</th>
+      <% end %>
+    </tr>
+  <thead>
+
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <% if (appointment.is_active && appointment.doctor == current_user.id) || (appointment.patient == current_user.id) || current_user.user_role == 0 %>
+        <tr class="card-text" style="transform: rotate(0);">
+          <td><%= link_to appointment.complaint, appointment, class:"link-dark text-decoration-none stretched-link"%>
+          </td>
+          <td><%= appointment.recommendation %></td>
+          <% if current_user.user_role == 0 %>
+            <td><%= appointment.doctor %></td>
+            <td><%= appointment.patient %></td>
+            <td><%= appointment.id %></td>
+            <td><strong><%= link_to appointment.is_active ? "True" : "False", appointment, class:"link-dark text-decoration-none stretched-link"%></strong></td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+    <% if current_user.user_role == 0 %>
+      <tr class="card-text text-center" style="transform: rotate(0);"><td colspan=<%= 7 - current_user.user_role %>><strong><%= link_to "Create appointment", new_appointment_path, class:"h4 link-dark stretched-link text-decoration-none"%></strong></td></tr>
+    <% end %>
+  </tbody>
+</table>
+
+<style>
+table {
+  border-collapse:separate;
+  border:solid 5px;
+  border-radius:10px;
+}
+
+th, td {
+  border-radius:5px;
+}
+</style>

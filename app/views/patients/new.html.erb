@@ -1,0 +1,8 @@
+<div class="card">
+  <h2 class="card-header">New patient</h2>
+  <div class="card-body">
+    <%= render "form", patient: @patient %>
+    <br/>
+    <%= link_to "Back to patients", patients_path, class:"btn btn-outline-secondary" %>
+  </div>
+</div>

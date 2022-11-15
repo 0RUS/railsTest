@@ -1,0 +1,41 @@
+<%= form_with(model: appointment) do |form| %>
+  <% if appointment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+
+      <ul>
+        <% appointment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.number_field :doctor,
+      class:"form-control",
+      placeholder:"Doctor ID" %>
+    <br/>
+    <%= form.number_field :patient,
+      class:"form-control",
+      placeholder:"Patient ID" %>
+    <br/>
+    <%= form.text_field :complaint,
+    class:"form-control", 
+    placeholder:"Complaint" %>
+    <br/>
+    <%= form.text_field :recommendation,
+    class:"form-control", 
+    placeholder:"Recommendation" %>
+    <br/>
+    <%= form.check_box :is_active,
+      class:"form-check-input",
+      checked: :is_active %>
+    <%= form.label "Active",
+      class:"form-check-label"%>
+  </div>
+  <br/>
+  <div class="actions">
+    <%= form.submit class:"btn btn-success" %>
+  </div>
+<% end %>

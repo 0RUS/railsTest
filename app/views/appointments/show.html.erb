@@ -1,0 +1,24 @@
+<div class="d-flex flex-column" style="align-items: center;">
+  <%= render @appointment %>
+
+  <% if (current_user.user_role == 2 && @appointment.is_active) || current_user.user_role == 0 %>
+    <br/>
+    <%= form_for @appointment, url: "/appointments/"+@appointment.id.to_s, method: "put" do |form| %>
+      <div class="input-group mb-3">
+        <%= form.check_box :is_active,
+          checked: false, hidden: true %>
+        <%= form.text_field :recommendation,
+          class:"form-control",
+          placeholder:"Recommendation" %>
+        <%= form.submit "Give recommendation", class:"btn btn-outline-secondary"%>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="btn-toolbar" role="toolbar" style="display: flex; align-items: center; justify-content: center;">
+  <%= link_to "Back to appointments", appointments_path,  class:"m-1 btn btn-primary" %>
+  <% if current_user.user_role == 0 %>
+  <%= link_to "Edit", edit_appointment_path(@appointment), class:" m-1 btn btn-outline-warning" %>
+  <%= button_to "Delete", @appointment, method: :delete, class:" m-1 btn btn-outline-danger" %>
+  <% end %>
+</div>

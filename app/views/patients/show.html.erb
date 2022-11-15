@@ -1,0 +1,9 @@
+<%= render @patient %>
+
+<div class="btn-toolbar" role="toolbar" style="display: flex; align-items: center; justify-content: center;">
+  <%= link_to "Back to patients", patients_path, class:"m-1 btn btn-primary" %>
+  <% if current_user.user_role == 0 %>
+  <%= link_to "Edit", edit_patient_path(@patient), class:" m-1 btn btn-outline-warning" %>
+  <%= button_to "Delete", @patient, method: :delete, class:" m-1 btn btn-outline-danger" %>
+  <% end %>
+</div>

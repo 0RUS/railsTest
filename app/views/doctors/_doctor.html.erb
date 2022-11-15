@@ -1,0 +1,17 @@
+<div id="<%= dom_id doctor %>" style="display: flex; align-items: center; justify-content: center;">
+  <div class="card" style="width: 30rem;">
+    <h1 class="card-header text-center"><%= doctor.first_name + " " + doctor.last_name %></h1>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Phone: </strong><%= doctor.phone %></li>
+        <li class="list-group-item"><strong>Email: </strong><%= doctor.email %></li>
+        <li class="list-group-item"><strong>Price: </strong><%= doctor.price %></li>
+        <li class="list-group-item"><strong>Post: </strong><%= doctor.post %></li>
+        <% if current_user.user_role == 0 %>
+          <li class="list-group-item"><strong>Doctor ID:</strong><%= doctor.id %></li>
+          <li class="list-group-item"><strong>Free:</strong><%= doctor.free %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

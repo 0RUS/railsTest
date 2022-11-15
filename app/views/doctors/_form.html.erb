@@ -1,0 +1,67 @@
+<%= form_with(model: doctor, html: { :id => "doctor" }) do |form| %>
+  <% if doctor.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(doctor.errors.count, "error") %> prohibited this doctor from being saved:</h2>
+
+      <ul>
+        <% doctor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.text_field :first_name,
+      class:"form-control", 
+      placeholder:"First name" %>
+    <br/>
+    <%= form.text_field :last_name,
+      class:"form-control", 
+      placeholder:"Last name" %>
+    <br/>
+    <%= form.number_field :price,
+      class:"form-control", 
+      placeholder:"Service Price",
+      min:"0" %>
+    <br/>
+    <%= form.text_field :post,
+      class:"form-control", 
+      placeholder:"Your post" %>
+    
+    <% if current_user.user_role == 0 %>
+      <br/>
+      <%= form.check_box :free,
+        class:"form-check-input" %>      
+      <%= form.label "Free",
+        class:"form-check-label"%>
+      <br/>
+      <br/>
+      <%= form.number_field :user_id,
+        class:"form-control",
+      placeholder:"User ID" %>
+      <br/>
+      <%= form.text_field :email,
+        class:"form-control",
+      placeholder:"Email" %>
+      <br/>
+      <%= form.text_field :phone,
+        class:"form-control",
+      placeholder:"Phone" %>
+    <% else %>
+      <%= form.number_field :user_id,
+        value: current_user.id, hidden: true %>
+      <%= form.text_field :email,
+        value: current_user.email, hidden: true %>
+      <%= form.text_field :phone,
+        value: current_user.phone, hidden: true %>
+      <%= form.check_box :free,
+        checked: true, hidden: true %>
+
+    <% end %>
+  </div>
+  <div class="actions">
+    <br/>
+    <%= form.submit class:"btn btn-success" %>
+  </div>
+<% end %>

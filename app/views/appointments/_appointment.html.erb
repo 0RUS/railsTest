@@ -1,0 +1,15 @@
+<div id="<%= dom_id appointment %>" style="display: flex; align-items: center; justify-content: center;">
+  <div class="card"  style="width: 30rem;">
+    <h1 class="card-header text-center"><%= appointment.complaint %></h1>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Recommendation: </strong><%= appointment.recommendation %></li>
+        <% if current_user.user_role == 0 %>
+          <li class="list-group-item"><strong>Doctor ID: </strong><%= appointment.doctor %></li>
+          <li class="list-group-item"><strong>Patient ID: </strong><%= appointment.patient %></li>
+          <li class="list-group-item"><strong>Active: </strong><%= appointment.is_active %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

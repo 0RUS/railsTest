@@ -1,0 +1,51 @@
+<h1>Doctors List</h1>
+<table class="table table-secondary table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Post</th>
+      <th>Price</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <% if current_user.user_role == 0 %>
+        <th>ID:</th>
+        <th>User ID:</th>
+        <th>Free:</th>
+      <% end %>
+    </tr>
+  <thead>
+
+  <tbody>
+    <% @doctors.each do |doctor| %>
+      <% if doctor.free || current_user.user_role == 0 %>
+        <tr class="card-text" style="transform: rotate(0);">
+          <td><strong><%= link_to doctor.first_name + " " + doctor.last_name, doctor, class:"link-dark text-decoration-none stretched-link" %></strong></td>
+          <td><%= doctor.post %></td>
+          <td><%= doctor.price %></td>
+          <td><%= doctor.email %></td>
+          <td><%= doctor.phone %></td>
+          <% if current_user.user_role == 0 %>
+            <th><%= doctor.id %></th>
+            <th><%= doctor.user_id %></th>
+            <th><%= doctor.free %></th>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+    <% if current_user.user_role == 0 %>
+      <tr class="card-text text-center" style="transform: rotate(0);"><td colspan=<%= 8 - current_user.user_role %>><strong><%= link_to "Create doctor", new_doctor_path, class:"h4 link-dark stretched-link text-decoration-none"%></strong></td></tr>
+    <% end %>
+  </tbody>
+</table>
+
+<style>
+table {
+  border-collapse:separate;
+  border:solid 5px;
+  border-radius:10px;
+}
+
+th, td {
+  border-radius:5px;
+}
+</style>

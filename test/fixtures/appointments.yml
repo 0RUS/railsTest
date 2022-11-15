@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  is_active: false
+  doctor: 1
+  patient: 1
+  complaint: MyString
+  recommendation: MyString
+
+two:
+  is_active: false
+  doctor: 1
+  patient: 1
+  complaint: MyString
+  recommendation: MyString
